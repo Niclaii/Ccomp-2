@@ -127,10 +127,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Transformador.cpp" />
+    <ClCompile Include="Calculadora Modular.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Transformador.h" />
+    <ClInclude Include="Calculadora Modular.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,9 +1,2 @@
-﻿  Transformador.cpp
-C:\Users\ALUMNO-B303\Desktop\Project1\Project1\Transformador.cpp(127,10): warning C4552: "-": el resultado de la expresión no se usa
-C:\Users\ALUMNO-B303\Desktop\Project1\Project1\Transformador.cpp(133,10): warning C4552: "-": el resultado de la expresión no se usa
-C:\Users\ALUMNO-B303\Desktop\Project1\Project1\Transformador.cpp(138,10): warning C4552: "-": el resultado de la expresión no se usa
-C:\Users\ALUMNO-B303\Desktop\Project1\Project1\Transformador.cpp(143,10): warning C4552: "-": el resultado de la expresión no se usa
-C:\Users\ALUMNO-B303\Desktop\Project1\Project1\Transformador.cpp(148,10): warning C4552: "-": el resultado de la expresión no se usa
-C:\Users\ALUMNO-B303\Desktop\Project1\Project1\Transformador.cpp(153,10): warning C4552: "-": el resultado de la expresión no se usa
-C:\Users\ALUMNO-B303\Desktop\Project1\Project1\Transformador.cpp(158,10): warning C4552: "-": el resultado de la expresión no se usa
-  Project1.vcxproj -> C:\Users\ALUMNO-B303\Desktop\Project1\x64\Debug\Project1.exe
+﻿  Calculadora Modular.cpp
+  Project1.vcxproj -> C:\Users\nxqui\OneDrive\Documentos\GitHub\Ccomp 2\Project1\x64\Debug\Project1.exe

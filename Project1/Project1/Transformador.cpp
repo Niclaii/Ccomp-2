@@ -1,60 +1,39 @@
 #include <iostream>
 #include "Transformador.h"
+
 using namespace std;
  
-int numero, contadorI, contadorV, contadorX, contadorL, contadorC, contadorD, contadorM;
+int opcion{0}, numero{0}, contadorI{0}, contadorV{0}, contadorX{0}, contadorL{0}, contadorC{0}, contadorD{0}, contadorM{0}, contador_V{0}, contador_X{0};
+bool terminar{ false };
+
+
 
 int main()
 {
-	cout << "ingrese un numero del 1 al 9999:";
-	cin >> numero;
-
-	for (int i=0; numero > 1000; i++)
+	do
 	{
+		cout << "ingrese un numero del 1 al 9999:";
+		cin >> numero;
 
-		numero - 1000;
-		contadorM++;
+		PonerContador(numero, contadorI, contadorV, contadorX, contadorL, contadorC, contadorD, contadorM, contador_V, contador_X);
+		CantidadDeLetras(contadorI, contadorV, contadorX, contadorL, contadorC, contadorD, contadorM, contador_V, contador_X);
 
-	};
-	for (int i = 0; numero > 500; i++)
-	{
-		numero - 500;
-		contadorD++;
-	};
-	for (int i = 0; numero > 100; i++)
-	{
-		numero - 500;
-		contadorC++;
-	};
-	for (int i = 0; numero > 50; i++)
-	{
-		numero - 50;
-		contadorL++;
-	};
-	for (int i = 0; numero > 10; i++)
-	{
-		numero - 10;
-		contadorX++;
-	};
-	for (int i = 0; numero > 5; i++)
-	{
-		numero - 5;
-		contadorV++;
-	};
-	for (int i = 0; numero > 1; i++)
-	{
-		numero - 1;
-		contadorI++;
-	};
 
-	CantidadDeLetras(contadorI, contadorV, contadorX, contadorL, contadorC, contadorD, contadorM);
+		cout << "\nDesea continuar?(1.Si/2.No)";
+		cin >> opcion;
+		if (opcion == 1)
+		{
+			terminar = false;
+		}
+		else if (opcion == 2)
+		{
+			terminar = true;
+		}
 
 
 
-
-
-
-
+	} while (terminar==false);
+	
 
 	return 0;
 }
