@@ -57,27 +57,81 @@ void mesLetras(int mes)
 	return;
 }
 
-void ImprimirCalendario(int dia,int mes,int año)
+bool Bisiesto(int año)
 {
-	int a{ 1 }, x[31];
-
-	cout << "\nDom " << "Lun " << "Mar " << "Mie " << "Jue " << "Vie " << "Sab \n";
-
-
-
-	for (int i{ 1 }; i < 31; i++)
+	if (año % 4 != 0)
 	{
-
-
-
+		return false;
 	}
-	return;
+	else if (año % 100 != 0)
+	{
+		return true;
+	}
+	else if (año % 400 != 0)
+	{
+		return false;
+	}
+	return true;
 }
 
-int CalcularDias(int mes, int a)
+int CalcularDias(int mes, int año)
 {
 	if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12)
 	{
-
+		return 31;
 	}
+	if (mes == 2)
+	{
+		if (Bisiesto(año) == true)
+		{
+			return 29;
+		}
+		else
+		{
+			return 28;
+		}
+	}
+	return 30;
+}
+
+int ordenamiento(int año, int mes, int dia)
+{
+	int a = (14 - mes) / 12;
+	int y = año - a;
+	int m = mes + 12 * a - 2;
+
+	int d = (dia + y + y / 4 - y / 100 + y / 400 + (31 * m) / 12) % 7;
+	return d;
+}
+
+
+void ImprimirCalendario(int dia, int mes, int año)
+{
+	int cantdias = CalcularDias(mes, año);
+	int x = ordenamiento(año, mes, 1);
+
+	cout << "\nDom " << "Lun " << "Mar " << "Mie " << "Jue " << "Vie " << "Sab \n";
+
+	for (int i = 0; i <= x; i++)
+	{
+		cout << "   ";
+	}
+	for (int i{ 1 }; i <= cantdias; i++)
+	{
+		if (i < 10)
+		{
+			cout << i << "   ";
+		}
+		else
+		{
+			cout << i << "  ";
+		}
+		x++;
+		if (x % 7 == 0)
+		{
+			cout << "\n";
+		}
+	}
+	cout << endl;
+	return;
 }
