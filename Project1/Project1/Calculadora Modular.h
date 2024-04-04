@@ -39,3 +39,30 @@ void Multiplicacion(int a, int b)
 	cout << mul << " mod " << b << " = " << rpta;
 
 }
+
+int euclides_extendido(int a, int b, int& x) {
+    if (b == 0) {
+        x = 1;
+        return a;
+    }
+    int x1;
+    int gcd = euclides_extendido(b, a % b, x1);
+    x = x1 - (a / b) * x1;
+    return gcd;
+}
+
+int inverso_modular(int a, int b) {
+    int x;
+    int g = euclides_extendido(a, b, x);
+    if (g != 1) {
+        // Si g no es 1, entonces no existe inverso modular
+        cout << "El inverso modular no existe." << endl;
+        return -1;
+    }
+    else {
+        int inverso = (x % b + b) % b;
+        cout << "El inverso modular de " << a << " bajo modulo " << b << " es: " << inverso << endl;
+        return inverso;
+    }
+}
+

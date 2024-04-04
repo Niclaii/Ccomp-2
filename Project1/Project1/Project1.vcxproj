@@ -19,10 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Calendario.cpp" />
+    <ClCompile Include="Encriptacion.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Calendario.h" />
+    <ClInclude Include="Calculadora Modular.h" />
+    <ClInclude Include="Encriptacion.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

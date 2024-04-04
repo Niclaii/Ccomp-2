@@ -10,7 +10,7 @@ int main()
 
 	do
 	{
-		cout << "Elija una de las siguientes opciones:\n1.Suma\n2.Resta\n3.Multiplicación\n4.Salir\n";
+		cout << "Elija una de las siguientes opciones:\n1.Suma\n2.Resta\n3.Multiplicación\n4.Inversa\n5.Salir\n";
 		cin >> opcion;
 
 		if (opcion == 1)
@@ -41,6 +41,14 @@ int main()
 			Multiplicacion(a, b);
 		}
 		else if (opcion == 4)
+		{
+			cout << "Ingrese el valor para a ( a mod b )";
+			cin >> a;
+			cout << "Ingrese el valor para b ( a mod b )";
+			cin >> b;
+			inverso_modular(a, b);
+		}
+		else if (opcion == 5)
 		{
 			break;
 		}
