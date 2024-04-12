@@ -13,12 +13,8 @@ int main()
 	cout << "ingresa la fecha que desees (mes) ";
 	cin >> mes;
 
-	cout << "ingresa la fecha que desees (anio) ";
+	cout << "ingresa la fecha que desees (año) ";
 	cin >> year;
-
-	cout << dia<<" ";
-	mesLetras(mes);
-	cout <<" "<< year << " ";
 
 	ImprimirCalendario(dia, mes, year);
 

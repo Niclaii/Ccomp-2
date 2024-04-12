@@ -1,57 +1,48 @@
-#pragma once
 #include <iostream>
-#include <fstream>
+#include <fstream> 
 #include <string>
 
 using namespace std;
 
-
-// Funciones básicas para encriptar y desencriptar
-string encriptar(string texto, int clave) {
-    string resultado = "";
-    for (char c : texto)
+int inverso_modular(int a, int modulo)
+{
+    int inverso = 1;
+    while ((a * inverso) % modulo != 1) 
     {
-        // Desplazar dentro del rango imprimible de ASCII (32 a 126)
-        int desplazado = ((c - 32 + clave) % 95) + 32; // Asegura que sea imprimible
-        resultado += char(desplazado);
+        inverso++;
+        if (inverso > modulo)
+        {  
+            return -1;  
+        }
     }
-    return resultado;
+    return inverso;
 }
 
-string desencriptar(string textoCifrado, int clave) {
-    string resultado = "";
-    for (char c : textoCifrado)
+string cifrarTexto(const string& texto, int clave, int modulo)
+{
+    string textoCifrado;
+    for (char c : texto) 
     {
-        // Invertir el desplazamiento dentro del mismo rango
-        int desplazado = ((c - 32 - clave + 95) % 95) + 32; // Ajuste para negativos
-        resultado += char(desplazado);
+        if (c >= 32 && c <= 126) 
+        {
+            int valor = c - 32;
+            int cifrado = (valor * clave) % modulo;
+            char caracterCifrado = cifrado + 32;
+            textoCifrado += caracterCifrado;
+        }
+        else 
+        {
+            textoCifrado += c;
+        }
     }
-    return resultado;
+    return textoCifrado;
 }
 
-int euclides_extendido(int a, int b, int& x) {
-    if (b == 0) 
-    {
-        x = 1;
-        return a;
-    }
-    int x1;
-    int gcd = euclides_extendido(b, a % b, x1);
-    x = x1 - (a / b) * x1;
-    return gcd;
+string descifrarTexto(const string& textoCifrado, int claveInversa, int modulo) {
+    return cifrarTexto(textoCifrado, claveInversa, modulo);
 }
 
-int inverso_modular(int a, int b) {
-    int x;
-    int g = euclides_extendido(a, b, x);
-    if (g != 1) 
-    {
-        return -1;
-    }
-    else 
-    {
-        int inverso = (x % b + b) % b;
-        cout << "El inverso modular de " << a << " bajo modulo " << b << " es: " << inverso << endl;
-        return inverso;
-    }
+bool esArchivoVacio(const string& nombreArchivo) {
+    ifstream archivo(nombreArchivo, ifstream::ate | ifstream::binary);
+    return archivo.is_open() && archivo.tellg() == 0;
 }

@@ -42,11 +42,25 @@ int main()
 		}
 		else if (opcion == 4)
 		{
+			bool VI{ false };
 			cout << "Ingrese el valor para a ( a mod b )";
 			cin >> a;
 			cout << "Ingrese el valor para b ( a mod b )";
 			cin >> b;
-			inverso_modular(a, b);
+
+			do
+			{
+				if (inverso_modular(a, b) == -1)
+				{
+					continue;
+				}
+				else
+				{
+					cout << "El inverso modular  es: " << inverso_modular(a,b) << endl;
+					VI = true;
+				}
+			} while (VI == false);
+			
 		}
 		else if (opcion == 5)
 		{
