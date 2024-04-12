@@ -6,11 +6,11 @@ using namespace std;
 int main()
 {
 	int opcion{ 0 }, opcion2, a{ 0 }, b{ 0 };
-	bool continuar{ true };
+	bool continuar{ true },VI{ false };
 
 	do
 	{
-		cout << "Elija una de las siguientes opciones:\n1.Suma\n2.Resta\n3.Multiplicación\n4.Inversa\n5.Salir\n";
+		cout << "Elija una de las siguientes opciones:\n1.Suma\n2.Resta\n3.Multiplicacion\n4.Inversa\n5.Salir\n";
 		cin >> opcion;
 
 		if (opcion == 1)
@@ -42,7 +42,7 @@ int main()
 		}
 		else if (opcion == 4)
 		{
-			bool VI{ false };
+			
 			cout << "Ingrese el valor para a ( a mod b )";
 			cin >> a;
 			cout << "Ingrese el valor para b ( a mod b )";
@@ -52,6 +52,8 @@ int main()
 			{
 				if (inverso_modular(a, b) == -1)
 				{
+					cout << "Ingrese el valor para a ( a mod b ) porque no tiene inversa ";
+					cin >> a;
 					continue;
 				}
 				else

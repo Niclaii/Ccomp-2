@@ -8,7 +8,7 @@ int main()
 {  
     bool continuar{ true }, validacion{false},VI(false);
     int clave{ 0 },  opcion1{ 0 }, opcion2{0};
-    static int modulo{ 95 };
+    static int modulo{ 256 };
     string texto;
 
     do
@@ -19,8 +19,6 @@ int main()
 
         if (opcion1 == 1)
         {
-            cout << "Ingrese el texto a encriptar: ";
-            getline(cin, texto);
 
             do
             {
@@ -39,26 +37,44 @@ int main()
 
                 }
             } while (VI == false);
-                    
-            string textoCifrado = cifrarTexto(texto, clave, modulo);
+              
+            ifstream archivoEntrada("texto.txt");
+            /*string textoCifrado((istreambuf_iterator<char>(archivoEntrada)),
+                istreambuf_iterator<char>());
+            archivoEntrada.close();    
+            */
             ofstream archivoSalida("textoCifrado.txt");
+            string texto;
+            
+
 
             if (archivoSalida.is_open())
             {
-                archivoSalida << textoCifrado;
-                archivoSalida.close();
-                cout << "Texto cifrado guardado en 'textoCifrado.txt'.\n";
+                if (archivoEntrada.is_open())
+                {
+                    string linea;
+                    while (getline(archivoEntrada, linea))
+                    {
+                        texto += linea + "\n";
+                    }
+
+                    string TextoEncriptado = cifrarTexto(texto,clave,modulo);
+                    texto == archivoSalida;
+
+                    archivoSalida.close();
+                    cout << "Texto cifrado guardado en 'textoCifrado.txt'.\n";
+                }
+               
             }
             else
             {
                 cout << "No se pudo abrir el archivo para escribir.\n";
             }
 
-            cout << "Texto cifrado: " << textoCifrado << "\n";
         }
-        else if (opcion2 == 2)
+        else if (opcion1 == 2)
         {
-            if (esArchivoVacio("textoCifrado.txt"))
+            if (esArchivoVacio("texto.txt"))
             {
                 cout << "El archivo 'textoCifrado.txt' está vacío o no existe." << endl;
             }
