@@ -1,0 +1,13 @@
+Implementar un programa (C/C++) que emule la multiplicaci´on de dos valores en punto flotante de acuerdo al
+algoritmo de la Figura 1.
+ Debe ser capaz de recibir dos valores en variables float de 32 bits reales de su lenguaje de programaci´on. As´ı
+se asegura que los valores entrados desde consola sean correctamente interpretados como punto flotante.
+ Debe separarse los patrones de bits de: signo, exponentes y significandos y almacenarlos en registros separados. Se sugiere que sean almacenados en registros de 32 bits, as´ı se contar´a con bits de resguardo para los
+significandos.
+ Aplicar los pasos del algoritmo de la Figura 1 incluyendo:
+1. Las consultas por si alguno de los valores ingresados es 0.
+2. La suma binaria de los exponentes, procesamiento de suma en biased representation y sus verificaciones
+de overflow/underflow.
+3. Multiplicaci´on de los significandos.
+4. Normalizaci´on, redondeo.
+5. Ensamblaje del resultado final en un tercer registro de 32 bits punto flotante

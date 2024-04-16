@@ -8,7 +8,7 @@ int main()
 {  
     bool continuar{ true }, validacion{false},VI(false);
     int clave{ 0 },  opcion1{ 0 }, opcion2{0};
-    static int modulo{ 256 };
+    static int modulo{ 95 };
     string texto;
 
     do
@@ -39,10 +39,6 @@ int main()
             } while (VI == false);
               
             ifstream archivoEntrada("texto.txt");
-            /*string textoCifrado((istreambuf_iterator<char>(archivoEntrada)),
-                istreambuf_iterator<char>());
-            archivoEntrada.close();    
-            */
             ofstream archivoSalida("textoCifrado.txt");
             string texto;
             
@@ -59,7 +55,7 @@ int main()
                     }
 
                     string TextoEncriptado = cifrarTexto(texto,clave,modulo);
-                    texto == archivoSalida;
+                    archivoSalida << TextoEncriptado;
 
                     archivoSalida.close();
                     cout << "Texto cifrado guardado en 'textoCifrado.txt'.\n";
@@ -74,7 +70,7 @@ int main()
         }
         else if (opcion1 == 2)
         {
-            if (esArchivoVacio("texto.txt"))
+            if (esArchivoVacio("textoCifrado.txt"))
             {
                 cout << "El archivo 'textoCifrado.txt' está vacío o no existe." << endl;
             }
@@ -98,6 +94,28 @@ int main()
 
                 string textoDescifrado = descifrarTexto(textoCifrado, claveInversa, modulo);
                 cout << "Texto descifrado: " << textoDescifrado << "\n";
+
+                
+                ofstream archivoSalida("textoDescifrado.txt");
+                
+
+
+
+                if (archivoSalida.is_open())
+                {
+                    
+                        string linea;
+                        while (getline(archivoEntrada, linea))
+                        {
+                            texto += linea + "\n";
+                        }
+
+                        
+                        archivoSalida << textoDescifrado;
+
+                        archivoSalida.close();
+                        cout << "Texto cifrado guardado en 'textoDescifrado.txt'.\n";
+                }
             }
         }
 
