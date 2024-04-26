@@ -19,10 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Palindromo.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Palindromo.h" />
+    <ClCompile Include="Reverse.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

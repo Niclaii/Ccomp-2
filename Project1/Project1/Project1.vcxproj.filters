@@ -15,12 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Palindromo.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Palindromo.cpp">
+    <ClCompile Include="Reverse.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
