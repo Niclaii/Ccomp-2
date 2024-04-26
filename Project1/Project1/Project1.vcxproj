@@ -19,7 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Reverse.cpp" />
+    <ClCompile Include="CocktailSort.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CocktailSort.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

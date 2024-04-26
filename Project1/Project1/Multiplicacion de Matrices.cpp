@@ -75,5 +75,6 @@ int main()
 	Imprimir_matrices(A);
 	Establecer_matriz(A);
 	Imprimir_matrices(A);
+
 	return 0;
 }
