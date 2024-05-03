@@ -15,13 +15,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CocktailSort.cpp">
+    <ClCompile Include="Reverse.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CocktailSort.h">
-      <Filter>Archivos de origen</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

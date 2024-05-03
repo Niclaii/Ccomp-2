@@ -126,15 +126,16 @@ void cocktailDe(int* ptrI, int* ptrF, int* ptrA)
 
 void BusquedaBinariaAs(int* ptrI, int* ptrF, int* ptrA)
 {
-	
-	int* temp= ptrI ;
+	int* temp{ ptrI };
 	int CE{ 0 }, num{ 0 };
 
 	cout << "Ingrese el numero a buscar: ";
 	cin >> num;
 
-
-	CE = ptrF - ptrI + 1;
+	for (; temp <= ptrF; temp++)
+	{
+		CE++;
+	}
 	ptrA = ptrF - (CE / 2);
 	CE = 0;
 
@@ -153,19 +154,31 @@ void BusquedaBinariaAs(int* ptrI, int* ptrF, int* ptrA)
 		else if (*ptrA > num)
 		{
 			ptrF = ptrA - 1;
-			CE = ptrF - ptrI + 1;
-			int* a = ptrF;
-			ptrA = a - (CE / 2);			
+
+			CE = 0;
+			
+			for (; temp <= ptrF; temp++)
+			{
+				CE++;
+
+			}
+
+			ptrA = ptrF - (CE / 2);
 			int* temp = ptrI;
 		}
 		else if (*ptrA < num)
 		{
 			ptrI = ptrA + 1;
-			CE = ptrF - ptrI + 1;
+
+			CE = 0;
+			for (; temp <= ptrF; temp++)
+			{
+				CE++;
+
+			}
 			ptrA = ptrI + (CE / 2);
 			int* temp = ptrI;
 		}
-		
 	}
 }
 
@@ -177,7 +190,11 @@ void BusquedaBinariaDe(int* ptrI, int* ptrF, int* ptrA)
 	cout << "Ingrese el numero a buscar: ";
 	cin >> num;
 
-	CE = ptrF - ptrI + 1;
+	for (; temp <= ptrF; temp++)
+	{
+		CE++;
+	}
+	ptrA = ptrF - (CE / 2);
 	CE = 0;
 
 	while (true)
@@ -196,7 +213,12 @@ void BusquedaBinariaDe(int* ptrI, int* ptrF, int* ptrA)
 		{
 			ptrF = ptrA - 1;
 
-			CE = ptrF - ptrI + 1;
+			CE = 0;
+			for (; ptrI <= ptrF; ptrI++)
+			{
+				CE++;
+
+			}
 
 			ptrA = ptrF - (CE / 2);
 			int* temp = ptrI;
@@ -205,7 +227,12 @@ void BusquedaBinariaDe(int* ptrI, int* ptrF, int* ptrA)
 		{
 			ptrI = ptrA + 1;
 
-			CE = ptrF - ptrI + 1;
+			CE = 0;
+			for (; temp <= ptrF; temp++)
+			{
+				CE++;
+
+			}
 			ptrA = ptrI + (CE / 2);
 			int* temp = ptrI;
 		}	
