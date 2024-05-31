@@ -16,21 +16,17 @@ int RellenoCero()
     return 0;
 }
 
-
-
-
-int** MatrizA(int fila, int columna,int alternativa)
+int** MatrizA(int fila, int columna, int (*alternativa)())
 {
-    int a{ 0 };
+    //int a{ 0 };
     cout << "Matriz A:" << endl;
     int** A = new int* [fila];
-    for (int** p = A; *p < *A + fila; p++)
+    for (int** p = A; p < A + fila; p++)
     {
         *p = new int[columna];
         for (int* q = *p; q < *p + columna; q++)
         {
-            cout << "Ingrese un valor: ";
-            cin >> a;
+            int a = alternativa();
             *q = a;
             cout << *q << " ";
         }
@@ -39,168 +35,101 @@ int** MatrizA(int fila, int columna,int alternativa)
     return A;
 }
 
-int** MatrizAB(int fila, int columna, int (*alternativa)())
+int** MatrizB(int fila, int columna, int (*alternativa)())
 {
-    //int a{ 0 };
-    cout << "Matriz A:" << endl;
-    int** A = new int* [fila];
-    for (int** p = A; *p < *A + fila; p++)
+    int **A = MatrizA(fila, columna,alternativa);
+    cout << "\nMatriz B:" << endl;
+    int** B = new int* [columna];
+    int sumador{ 0 };
+    for (int** p = B , **n = A ; p < B + columna; p++)
+    {
+        *p = new int[fila];
+        for (int* q = *p ; q < *p + fila; q++)
+        {
+            if (n == A+fila)
+            {
+                n=A;
+                sumador++;
+                *q = *(*n + sumador);
+                n++;
+            }
+            else
+            {
+                *q = *(*n + sumador);
+                n++;
+            }
+            cout << *q << " ";
+        }
+        cout << endl;
+        
+    }
+
+    int** C = new int* [fila];
+    cout << "Matriz C (A * B):" << endl;
+    int contador{ 0 };  
+    bool PV{ true };
+
+    for (int** p = C, **pB = B, **pA = A; p < C + fila; p++)
     {
         *p = new int[columna];
-        for (int* q = *p; q < *p + columna; q++)
+        
+        for (int* q = *p ; q < *p + columna; q++)
         {
-            *q = alternativa();
+            *q = 0;
+            for (int k = 0; k < columna; k++)
+            {
+                
+                *q += (**pA) * (**pB);
+                (*pA)++;
+                if (PV == true)
+                {
+                    *pB++;
+                    PV = false;
+                }
+                else 
+                {
+                    *pB++;
+                }
+                contador++;
+                
+                if(contador==columna)
+                {
+                    (*pA)-=columna;
+                    pB = B;
+                    *pB--;
+                    contador = 0;
+                    PV = true;
+                }            
+            }   
             cout << *q << " ";
         }
         cout << endl;
     }
-    return A;
-}
 
-int** MatrizB(int fila, int columna)
-{
+    return C;
     
-    int **A = MatrizA(fila, columna);
-    cout << "\nMatriz B:" << endl;
-    int** B = new int* [columna];
-    for (int** p = B; *p < *B + columna; p++)
-    {
-        *p = new int[fila];
-        for (int* q = *p; q < *p + fila; q++)
-        {
-            B[i][j] = A[j][i];
-            cout << B[i][j] << " ";
-        }
-        cout << endl;
-    }
-
-
 }
-
-
-
-
-
-
-
-
-
-void Funcion1(int fila, int columna,int alternativa)
+/*
+int** MatrizC(int fila, int columna, int (*alternativa)())
 {
- 
-    MatrizA(fila, columna);
- 
-
+    int** A = MatrizB(fila, columna, alternativa);
+    int** B = MatrizB(fila, columna, alternativa);
     int** C = new int* [fila];
-    for (int i = 0; i < fila; i++) {
-        C[i] = new int[fila];
-        for (int j = 0; j < fila; j++) {
-            C[i][j] = 0;
-        }
-    }
-
     cout << "Matriz C (A * B):" << endl;
-    for (int i = 0; i < fila; i++) {
-        for (int j = 0; j < fila; j++) {
-            for (int k = 0; k < columna; k++) {
-                C[i][j] += A[i][k] * B[k][j];
-            }
-            cout << C[i][j] << " ";
-        }
-        cout << endl;
-    }
 
-    for (int i = 0; i < fila; i++)
+    for (int** p = C, **p2 = B, **p3 = A; p < C + fila; p++)
     {
-        delete[] A[i];
-
-    }
-    delete[] A;
-
-    for (int i = 0; i < columna; i++)
-    {
-        delete[] B[i];
-
-    }
-    delete[] B;
-
-    for (int i = 0; i < fila; i++)
-    {
-        delete[] C[i];
-
-    }
-    delete[] C;
-}
-void Funcion2(int fila, int columna)
-{
-    int a{ 1 };
-    cout << "Matriz A:" << endl;
-    int** A = new int* [fila];
-    for (int i = 0; i < fila; i++)
-    {
-        A[i] = new int[columna];
-        for (int j = 0; j < columna; j++)
+        *p = new int[columna];
+        int* q = *p;
+        for (int* q2 = *p2, *q3 = *p3; q < *p + columna;)
         {
-            A[i][j] = a++;
-            cout << A[i][j] << " ";
+            *q += *q2 + *q3;
         }
+        q++;
         cout << endl;
     }
-
-    cout << "\nMatriz B:" << endl;
-    int** B = new int* [columna];
-    for (int i = 0; i < columna; i++)
-    {
-        B[i] = new int[fila];
-        for (int j = 0; j < fila; j++)
-        {
-            B[i][j] = A[j][i];
-            cout << B[i][j] << " ";
-        }
-        cout << endl;
-    }
-
-    int** C = new int* [fila];
-    for (int i = 0; i < fila; i++) {
-        C[i] = new int[fila];
-        for (int j = 0; j < fila; j++) {
-            C[i][j] = 0;
-        }
-    }
-
-    cout << "Matriz C (A * B):" << endl;
-    for (int i = 0; i < fila; i++) {
-        for (int j = 0; j < fila; j++) {
-            for (int k = 0; k < columna; k++) {
-                C[i][j] += A[i][k] * B[k][j];
-            }
-            cout << C[i][j] << " ";
-        }
-        cout << endl;
-    }
-
-    for (int i = 0; i < fila; i++)
-    {
-        delete[] A[i];
-
-    }
-    delete[] A;
-
-    for (int i = 0; i < columna; i++)
-    {
-        delete[] B[i];
-
-    }
-    delete[] B;
-
-    for (int i = 0; i < fila; i++)
-    {
-        delete[] C[i];
-
-    }
-    delete[] C;
-}
-
+    return C;
+}*/
 int main()
 {
     int fila{ 0 }, columna{ 0 };
@@ -217,15 +146,18 @@ int main()
 
     cout << "Desea agregar los valores de cada array(1.Si | 2.No): ";
     cin >> alternativa;
-
+    /*
     if (alternativa == 1)
     {
-        Funcion1(fila, columna,alternativa);
+        Funcion1(fila, columna,RellenoCin);
     }
     else if (alternativa == 2)
     {
-        Funcion2(fila, columna);
-    }
+        Funcion1(fila, columna,RellenoCero);
+    }*/
+    //MatrizA(fila, columna, RellenoCin);
+    MatrizB(fila, columna, RellenoCin);
+
 
     return 0;
 }
