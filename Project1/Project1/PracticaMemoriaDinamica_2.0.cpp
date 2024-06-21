@@ -117,19 +117,20 @@ int** Multiplicacion(int& fila, int& columna, int (*alternativa)())
             *q = 0;
         }
     }
-    for (int** pA = A; pA < A + filaA; pA++)
+    for (int** pC=C; pC < C + filaA; pC++)
     {
-        for (int* qA = *pA; qA < *pA + columnaA; qA++)
+        for (int* qC=*pC; qC < *pC + columnaA; qC++)
         {
-            for (int** pB = B; pB < B + filaB; pB++)
+            int** pB = B;
+            for (int*pA = *(A+(pC-C)); pA < *(A+(pC-C)) + columnaA; pA++,pB++)
             {
-                int* pC = *(C + (pA - A)) + (pB - B);
-                *pC += (*qA) * (*(*pB + (qA - *pA)));
+                *qC += (*pA) * *(*pB + (qC - *pC));
             }
         }
     }
 
-    cout << "Matriz C (A * B):" << endl;
+    cout << "\nMatriz C (A * B):" << endl;
+    cout << endl;
     for (int** pC = C; pC < C + filaA; pC++)
     {
         for (int* qC = *pC; qC < *pC + columnaB; qC++)
@@ -138,11 +139,6 @@ int** Multiplicacion(int& fila, int& columna, int (*alternativa)())
         }
         cout << endl;
     }
-
-
-    //LiberarMatriz(A, filaA);
-    //LiberarMatriz(B, filaB);
-
     return C;
 }
 
@@ -190,12 +186,16 @@ int main()
                     Verificacion1 = true;
                     Verificacion2 = true;
                     Multiplicacion(fila, columna, RellenoCin);
+                    //LiberarMatriz(A, filaA);
+                    //LiberarMatriz(B, filaB);
                 }
                 else if (alternativa == 2)
                 {
                     Verificacion1 = true;
                     Verificacion2 = true;
                     Multiplicacion(fila, columna, RellenoCero);
+                    //LiberarMatriz(A, filaA);
+                    //LiberarMatriz(B, filaB);
                 }
             } while (Verificacion2 == false);
         }
