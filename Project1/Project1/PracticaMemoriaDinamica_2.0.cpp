@@ -16,9 +16,26 @@ int RellenoCero()
     return 0;
 }
 
-int** MatrizA(int fila, int columna, int (*alternativa)())
+void LiberarMatriz(int** matriz, int fila) {
+    for (int** p = matriz; p < matriz + fila; p++) {
+        delete[] * p;
+    }
+    delete[] matriz;
+}
+
+int** MatrizA(int& fila, int& columna, int (*alternativa)())
 {
-    cout << "Matriz A:" << endl;
+
+    cout << "Ingrese un valor para la fila: ";
+    cin >> fila;
+    cout << endl;
+
+    cout << "Ingrese un valor para la columna: ";
+    cin >> columna;
+    cout << endl;
+
+
+    cout << "Nueva Matriz:" << endl;
     int** A = new int* [fila];
     for (int** p = A; p < A + fila; p++)
     {
@@ -27,6 +44,13 @@ int** MatrizA(int fila, int columna, int (*alternativa)())
         {
             int a = alternativa();
             *q = a;
+        }
+    }
+    cout << endl;
+    for (int** p = A; p < A + fila; p++)
+    {
+        for (int* q = *p; q < *p + columna; q++)
+        {
             cout << *q << " ";
         }
         cout << endl;
@@ -34,20 +58,20 @@ int** MatrizA(int fila, int columna, int (*alternativa)())
     return A;
 }
 
-int** MatrizB(int fila, int columna, int (*alternativa)())
+int** Traspuesta(int fila, int columna, int(*alternativa)())
 {
-    int **A = MatrizA(fila, columna,alternativa);
-    cout << "\nMatriz B:" << endl;
+    int** A = MatrizA(fila, columna, alternativa);
+    cout << "\nMatriz Traspuesta:" << endl;
     int** B = new int* [columna];
     int sumador{ 0 };
-    for (int** p = B , **n = A ; p < B + columna; p++)
+    for (int** p = B, **n = A; p < B + columna; p++)
     {
         *p = new int[fila];
-        for (int* q = *p ; q < *p + fila; q++)
+        for (int* q = *p; q < *p + fila; q++)
         {
-            if (n == A+fila)
+            if (n == A + fila)
             {
-                n=A;
+                n = A;
                 sumador++;
                 *q = *(*n + sumador);
                 n++;
@@ -60,101 +84,122 @@ int** MatrizB(int fila, int columna, int (*alternativa)())
             cout << *q << " ";
         }
         cout << endl;
-        
+
+    }
+    return B;
+}
+
+int** Multiplicacion(int& fila, int& columna, int (*alternativa)())
+{
+    int** A = MatrizA(fila, columna, alternativa);
+    cout << endl;
+    int filaA = fila;
+    int columnaA = columna;
+
+    int** B = MatrizA(fila, columna, alternativa);
+    int filaB = fila;
+    int columnaB = columna;
+
+    if (columnaA != filaB)
+    {
+        cout << "No se puede realizar la multiplicacion" << endl;
+        //LiberarMatriz(A, filaA);
+        //LiberarMatriz(B, filaB);
+        return nullptr;
     }
 
-    int** C = new int* [fila];
-    cout << "Matriz C (A * B):" << endl;
-    int contadorfilas{ 0 }, contadorcolumnas{ 1 };
-    int X{ 1 };
-    int** pA = A;
-    int* pa = *pA;
-    int** pB = B;
-    int* pb = *pB;
-    int contadorElementos{ 0 };
-
-    columna = fila;
-
-    for (int** p = C; p < C + fila; p++)
+    int** C = new int* [filaA];
+    for (int** p = C; p < C + filaA; p++)
     {
-        *p = new int[columna];
-        
-        for (int* q = *p ; q < *p + columna;q++)
+        *p = new int[columnaB];
+        for (int* q = *p; q < *p + columnaB; q++)
         {
             *q = 0;
-            for (int k = 0; k < columna; k++)
-            {
-                *q += (*pa) * (*pb);
-                pa++;   
-                pB++;
-                pb=*pB;
-                if (contadorfilas < columna && contadorfilas != 0)
-                {
-                    pb += contadorfilas;  
-                }
-                                           
-            }   
-            cout << *q << " ";
-            ++contadorElementos;
-            if (contadorElementos == columna * columna)
-            {
-                break;
-            }
-            contadorfilas++;
-            pa = *pA;
-            pB = B;
-            pb = *pB;
-            pb += contadorfilas;
-            
-            if (contadorfilas == fila)
-            {
-                contadorfilas = 0;
-                pb = *pB;
-            }
-            if (X == columna-1)
-            { 
-                X = 1;
-            }
-            else
-            {
-                if (contadorcolumnas == columna)
-                {
-                    pA++;
-                    pa = *pA;
-                    contadorcolumnas = 1;
-                }
-                contadorcolumnas++;
-            }
-            
         }
-        cout << endl;
-        X++;
+    }
+    for (int** pA = A; pA < A + filaA; pA++)
+    {
+        for (int* qA = *pA; qA < *pA + columnaA; qA++)
+        {
+            for (int** pB = B; pB < B + filaB; pB++)
+            {
+                int* pC = *(C + (pA - A)) + (pB - B);
+                *pC += (*qA) * (*(*pB + (qA - *pA)));
+            }
+        }
     }
 
+    cout << "Matriz C (A * B):" << endl;
+    for (int** pC = C; pC < C + filaA; pC++)
+    {
+        for (int* qC = *pC; qC < *pC + columnaB; qC++)
+        {
+            cout << *qC << " ";
+        }
+        cout << endl;
+    }
+
+
+    //LiberarMatriz(A, filaA);
+    //LiberarMatriz(B, filaB);
+
     return C;
-    
 }
 
 int main()
 {
     int fila{ 0 }, columna{ 0 };
-    int alternativa{ 0 };
+    int alternativa{ 0 }, Seleccion{ 0 };
+    bool Verificacion1{ false }, Verificacion2{ false };
+    do
+    {
+        cout << "Que desea Realizar?(1.Traspuesta / 2. Multiplicación) ";
+        cin >> Seleccion;
+
+        if (Seleccion == 1)
+        {
+            do
+            {
+                cout << "Desea agregar los valores de cada array(1.Si | 2.No): ";
+                cin >> alternativa;
+                if (alternativa == 1)
+                {
+                    Verificacion1 = true;
+                    Verificacion2 = true;
+                    Traspuesta(fila, columna, RellenoCin);
+
+                }
+                else if (alternativa == 2)
+                {
+                    Verificacion1 = true;
+                    Verificacion2 = true;
+                    Traspuesta(fila, columna, RellenoCero);
+                }
+            } while (Verificacion2 == false);
 
 
-    cout << "Ingrese un valor para la fila: ";
-    cin >> fila;
-    cout << endl;
-
-    cout << "Ingrese un valor para la columna: ";
-    cin >> columna;
-    cout << endl;
-
-    cout << "Desea agregar los valores de cada array(1.Si | 2.No): ";
-    cin >> alternativa;
-
-    MatrizB(fila, columna, RellenoCin);
-
+        }
+        else if (Seleccion == 2)
+        {
+            do
+            {
+                cout << "Desea agregar los valores de cada array(1.Si | 2.No): ";
+                cin >> alternativa;
+                if (alternativa == 1)
+                {
+                    Verificacion1 = true;
+                    Verificacion2 = true;
+                    Multiplicacion(fila, columna, RellenoCin);
+                }
+                else if (alternativa == 2)
+                {
+                    Verificacion1 = true;
+                    Verificacion2 = true;
+                    Multiplicacion(fila, columna, RellenoCero);
+                }
+            } while (Verificacion2 == false);
+        }
+    } while (Verificacion1 == false);
 
     return 0;
 }
-
